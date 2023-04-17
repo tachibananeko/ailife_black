@@ -1,0 +1,454 @@
+
+body {
+	overflow-x: hidden;
+	overflow-y: auto;
+	@include d_f(flex);
+	flex-direction: column;
+	height: auto;
+	&::before {
+		content: "";
+		position: absolute;
+		right: 0;
+		// bottom: 0;
+		display: block;
+		width: 130%;
+		height: 250%;
+		background: radial-gradient(circle at center, #2a2f89, #040000);
+	}
+}
+.content {
+	position: relative;
+	@include d_f(flex, center, center);
+	width: 100%;
+	height: 100%;
+	padding: 0 20px;
+
+	@include mw_xs {
+		align-items: flex-start;
+	}
+}
+
+.header {
+	overflow: hidden;
+	position: relative;
+	flex: none;
+	@include d_f(flex, center, space-between);
+	padding: 20px;
+	z-index: 1;
+}
+.nav {
+	@include d_f(flex, center);
+	@extend %transition;
+	.--chating & {
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		width: 250px;
+		flex-direction: column;
+		height: calc(100% - 90px);
+		background-color: rgba(255, 255, 255, 0.1);
+		transform: translateX(0);
+
+		@include mw_xs {
+			transform: translateX(100%);
+		}
+	}
+	@include mw_lg {
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		width: 250px;
+		flex-direction: column;
+		height: calc(100% - 90px);
+		transform: translateX(100%);
+
+		@at-root .--active & {
+			transform: translateX(0);
+		}
+		// background-color: #2a2f89;
+	}
+	// .nav_menu
+	&_menu {
+		@include d_f(flex);
+		height: 100%;
+		.--chating & {
+			border-top: 1px solid hsla(0, 0%, 100%, 0.2);
+			flex-direction: column;
+			align-items: flex-start;
+			height: auto;
+		}
+		@include mw_lg {
+			border-top: 1px solid hsla(0, 0%, 100%, 0.2);
+			flex-direction: column;
+			align-items: flex-start;
+			height: auto;
+		}
+		// .nav_menu_item
+		&_item {
+			@include d_f(inline-flex, center, center);
+			font-size: 18px;
+			filter: invert(1);
+			.--chating & {
+				justify-content: flex-start;
+				width: 100%;
+				padding: 12px;
+			}
+			@include mw_lg {
+				justify-content: flex-start;
+				width: 100%;
+				padding: 12px;
+			}
+			i {
+				margin-right: 8px;
+			}
+			& + & {
+				margin-left: 20px;
+				.--chating & {
+					margin-left: 0;
+				}
+				@include mw_lg {
+					margin-left: 0;
+				}
+			}
+		}
+	}
+
+	// .nav_btn
+	&_btn {
+		display: none;
+		width: 30px;
+		height: 30px;
+		span {
+			display: inline-block;
+			width: 30px;
+			height: 2px;
+			border-radius: 100px;
+			background-color: #fff;
+			box-shadow: 0 -10px 0 #fff, 0 10px 0 #fff;
+		}
+		@at-root .--chating & {
+			display: none;
+			@include mw_xs {
+				display: block;
+			}
+		}
+		@include mw_lg {
+			display: block;
+		}
+	}
+
+	// .nav_lists
+	&_lists {
+		overflow-y: auto;
+		display: none;
+		height: 100%;
+		// .nav_lists_item
+		&_item {
+			padding: 12px;
+			font-size: 18px;
+			color: #fff;
+		}
+		.--chating & {
+			display: block;
+			width: 100%;
+		}
+		@include mw_lg {
+			display: block;
+			width: 100%;
+		}
+	}
+}
+
+.logo {
+	@include d_f(flex, center);
+	img:nth-child(1) {
+		flex: none;
+		width: 45px;
+		margin-right: 5px;
+	}
+	img:nth-child(2) {
+		flex: none;
+		width: 120px;
+	}
+}
+.add_btn {
+	position: relative;
+	@include d_f(flex, center);
+	width: 100%;
+	max-width: 160px;
+	height: 50px;
+	padding-left: 20px;
+	background-color: #fff;
+	color: #7c7b7b;
+	border-radius: 8px;
+	@extend %transition;
+	@at-root .--chating & {
+		position: relative;
+		transform: translateX(0);
+		right: 0;
+		@include mw_xs {
+			position: absolute;
+			right: 70px;
+			transform: translateX(calc(100% + 70px));
+		}
+	}
+	@include mw_lg {
+		position: absolute;
+		right: 70px;
+		// display: none;
+		transform: translateX(calc(100% + 70px));
+
+		@at-root .--active & {
+			transform: translateX(0);
+		}
+	}
+}
+.normal_inp {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 40px;
+	max-width: 657px;
+	margin-left: auto;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 4px;
+	@at-root .--chating & {
+		margin-right: auto;
+	}
+	@include mw_lg {
+		margin-right: auto;
+	}
+	input {
+		width: 100%;
+		height: 100%;
+		padding-left: 12px;
+		&::placeholder {
+			color: white;
+		}
+	}
+	i {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 20px;
+		margin: auto 0;
+		filter: invert(1);
+	}
+}
+.ailife {
+	// .ailife_title
+	&_title {
+		width: 100%;
+		max-width: 657px;
+		margin-left: auto;
+		color: #fff;
+		font-size: 57px;
+		@include mw_lg {
+			margin-right: auto;
+		}
+		@include mw_xs {
+			text-align: center;
+			font-size: 32px;
+		}
+
+		@at-root .--chating & {
+			transform: translateX(calc(-100% - 50px));
+			margin-left: 0;
+		}
+	}
+	// .ailife_info
+	&_info {
+		position: relative;
+		width: 100%;
+	}
+	// .ailife_pic
+	&_pic {
+		width: 100%;
+		@extend %transition;
+		@at-root .--chating & {
+			transform: translateX(120%);
+		}
+		@include mw_lg {
+			display: none;
+		}
+	}
+	// .ailife_input
+	&_input {
+		position: relative;
+		top: 0;
+		margin-top: 50px;
+		@extend %transition;
+		@include mw_xs {
+			margin-top: 25px;
+		}
+		@at-root .--chating & {
+			width: calc(100% - 290px);
+			animation: inputAni 1s forwards;
+			@include mw_xs {
+				width: calc(100% - 40px);
+				padding-right: 0;
+			}
+			// transform: translateX(calc(-100% - 20px));
+		}
+		@keyframes inputAni {
+			0% {
+				opacity: 1;
+			}
+			25% {
+				transform: translateX(calc(-100% - 20px));
+				opacity: 0;
+			}
+			65% {
+				position: fixed;
+				opacity: 0;
+				top: 100%;
+				transform: translateY(-100%);
+			}
+			100% {
+				position: fixed;
+				top: 100%;
+				opacity: 1;
+				margin-top: 0;
+				transform: translateY(calc(-100% - 20px));
+			}
+		}
+		p {
+			max-width: 657px;
+			margin-top: 12px;
+			margin-left: auto;
+			padding-left: 12px;
+			font-size: 12px;
+			color: #b3b3b3;
+			@at-root .--chating & {
+				margin-right: auto;
+			}
+			@include mw_lg {
+				margin-right: auto;
+			}
+		}
+	}
+	// .ailife_note
+	&_note {
+		@include d_f(flex);
+		max-width: 700px;
+		margin-top: 50px;
+		margin-left: auto;
+		@include mw_lg {
+			margin-right: auto;
+		}
+		@include mw_xs {
+			flex-wrap: wrap;
+			margin-top: 25px;
+		}
+
+		@at-root .--chating & {
+			transform: translateX(calc(-100% - 20px));
+			margin-left: 0;
+		}
+		// .ailife_note_info
+		&_info {
+			width: calc(100% / 3);
+
+			@include mw_xs {
+				width: 100%;
+				margin-bottom: 20px;
+			}
+			& + & {
+				margin-left: 20px;
+				@include mw_xs {
+					margin-left: 0;
+				}
+			}
+
+			.title {
+				position: relative;
+				width: 100%;
+				height: 47px;
+				padding-left: 20px;
+				line-height: 47px;
+				font-size: 16px;
+				color: #fff;
+				text-align: center;
+				background: linear-gradient(to left, #007cf2 0%, #753a92 100%);
+				border-radius: 100px;
+				&::before {
+					content: "";
+					position: absolute;
+					left: 0;
+					display: block;
+					width: 47px;
+					height: 47px;
+
+					border-radius: 100px;
+				}
+				&._example::before {
+					background: url("../images/icon_examples.svg") no-repeat
+							center/15px 23px,
+						linear-gradient(to left, #007cf2 0%, #753a92 100%);
+				}
+				&._capabilities::before {
+					background: url("../images/icon_capabilities.svg") no-repeat
+							center/23px 23px,
+						linear-gradient(to left, #007cf2 0%, #753a92 100%);
+				}
+				&._limitations::before {
+					background: url("../images/icon_limitations.svg") no-repeat
+							center/26px 23px,
+						linear-gradient(to left, #007cf2 0%, #753a92 100%);
+				}
+			}
+		}
+
+		// .ailife_note_group
+		&_group {
+			margin-top: 20px;
+			padding: 25px 15px 25px 25px;
+			background-color: rgba(255, 255, 255, 0.1);
+			border-radius: 8px;
+			color: #7c7b7b;
+		}
+		// .ailife_note_item
+		&_item {
+			font-size: 12px;
+			line-height: 13px;
+			list-style-type: disc;
+			& + & {
+				margin-top: 15px;
+			}
+		}
+	}
+
+	// .ailife_chatBox
+	&_chatBox {
+		overflow-y: auto;
+		display: none;
+		@at-root .--chating & {
+			position: absolute;
+			top: 0;
+			left: 20px;
+			display: block;
+			width: calc(100% - 290px);
+			height: calc(100% - 100px);
+
+			@include mw_xs {
+				width: calc(100% - 40px);
+				padding-bottom: 20px;
+			}
+		}
+
+		// .ailife_chatBox_item
+		&_item {
+			width: 100%;
+			max-width: 657px;
+			margin: auto;
+			padding: 20px;
+			color: #fff;
+			font-size: 14px;
+
+			&:nth-child(even) {
+				background: rgba(255, 255, 255, 0.1);
+			}
+		}
+	}
+}
+//

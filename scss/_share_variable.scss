@@ -1,0 +1,43 @@
+//背景顏色
+$bg_color: (
+	// primary: rgb(166, 125, 68),
+	// Dblue: #090c1d,
+	// lightblue: #1cfffb,
+	// white: #ffffff,
+	// gray: rgb(102, 102, 102),
+	// white_shadow: rgba(255, 255, 255, 0.1),
+	// black_shadow: rgba(0, 0, 0, 0.5),
+	// Dblue_shadow: rgba(3, 29, 58, 0.8),
+	// brown: #42210b,
+	// mahjong: #5e7125,
+	// mahjong_1: #b0af9d,
+	// mahjong_2: #fffbde
+);
+
+//文字顏色
+$txt_color: (
+	// primary: #ffffff,
+	// gold: #f8e199,
+	// red: rgb(193, 2, 14),
+	// black: #000000
+);
+
+//漸層線
+$border_color: (
+	// primary: linear-gradient(to left, #ae7a26 0%, #e9d079 50%),
+	// primary-circle: radial-gradient(circle, #e9d079, transparent) 1,
+	// black-circle: radial-gradient(circle, #000000 40%, transparent),
+	// green: linear-gradient(#000000 0%, #006a21 80%),
+	// gray: linear-gradient(to top, rgb(204, 204, 204) 0%, rgb(102, 102, 102) 30%),
+	// blue: linear-gradient(to top, rgb(41, 113, 251) 0%, rgb(0, 12, 89) 90%),
+	// blue-circle: radial-gradient(circle, rgb(0, 61, 143) 70%, transparent 100%),
+	// Dblue: linear-gradient(to top, rgb(8, 12, 28) 0%, rgb(0, 37, 77) 90%),
+	// white: linear-gradient(145deg, hsl(0, 0%, 90%) 0%, transparent 60%),
+	// mahjong: linear-gradient(to left, rgb(94, 113, 37) 0%, rgb(72, 88, 21) 100%),
+	// red: linear-gradient(to top, rgb(255, 0, 0) 0%, rgb(75, 0, 0) 90%)
+);
+//按鈕顏色
+$btn_color: (
+	// button-color: linear-gradient(to right, #a37d41 0%, #f3dd99 100%),
+	// button-bg: linear-gradient(to bottom, #e7283b 0%, #390208 100%)
+);
