@@ -1,15 +1,16 @@
-
 body {
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: hidden;
+	height: 100%;
+}
+.wrap {
 	@include d_f(flex);
 	flex-direction: column;
-	height: auto;
+	height: 100%;
 	&::before {
 		content: "";
-		position: absolute;
+		position: fixed;
 		right: 0;
-		// bottom: 0;
+		bottom: 0;
 		display: block;
 		width: 130%;
 		height: 250%;
@@ -17,11 +18,20 @@ body {
 	}
 }
 .content {
+	overflow-x: hidden;
 	position: relative;
 	@include d_f(flex, center, center);
 	width: 100%;
 	height: 100%;
 	padding: 0 20px;
+	@at-root .--chating & {
+		width: calc(100% - 240px);
+		height: calc(100% - 100px);
+
+		@include mw_xs {
+			width: 100%;
+		}
+	}
 
 	@include mw_xs {
 		align-items: flex-start;
@@ -32,23 +42,24 @@ body {
 	overflow: hidden;
 	position: relative;
 	flex: none;
-	@include d_f(flex, center, space-between);
-	padding: 20px;
+	@include d_f(flex, center);
+	padding: 10px 20px;
 	z-index: 1;
 }
 .nav {
 	@include d_f(flex, center);
+	margin: auto;
 	@extend %transition;
 	.--chating & {
 		position: fixed;
-		bottom: 0;
+		top: 0;
 		right: 0;
-		width: 250px;
+		width: 240px;
 		flex-direction: column;
-		height: calc(100% - 90px);
-		background-color: rgba(255, 255, 255, 0.1);
+		height: 100%;
+		padding-top: 10px;
+		background-color: rgba(0, 0, 0, 1);
 		transform: translateX(0);
-
 		@include mw_xs {
 			transform: translateX(100%);
 		}
@@ -57,11 +68,12 @@ body {
 		position: fixed;
 		bottom: 0;
 		right: 0;
-		width: 250px;
+		width: 240px;
 		flex-direction: column;
-		height: calc(100% - 90px);
+		height: 100%;
+		padding-top: 10px;
 		transform: translateX(100%);
-
+		background-color: rgba(0, 0, 0, 1);
 		@at-root .--active & {
 			transform: translateX(0);
 		}
@@ -72,12 +84,14 @@ body {
 		@include d_f(flex);
 		height: 100%;
 		.--chating & {
+			width: 100%;
 			border-top: 1px solid hsla(0, 0%, 100%, 0.2);
 			flex-direction: column;
 			align-items: flex-start;
 			height: auto;
 		}
 		@include mw_lg {
+			width: 100%;
 			border-top: 1px solid hsla(0, 0%, 100%, 0.2);
 			flex-direction: column;
 			align-items: flex-start;
@@ -86,8 +100,9 @@ body {
 		// .nav_menu_item
 		&_item {
 			@include d_f(inline-flex, center, center);
-			font-size: 18px;
+			font-size: 14px;
 			filter: invert(1);
+			@extend %hand;
 			.--chating & {
 				justify-content: flex-start;
 				width: 100%;
@@ -102,7 +117,7 @@ body {
 				margin-right: 8px;
 			}
 			& + & {
-				margin-left: 20px;
+				margin-left: 30px;
 				.--chating & {
 					margin-left: 0;
 				}
@@ -110,21 +125,74 @@ body {
 					margin-left: 0;
 				}
 			}
+
+			@include hoverHandler {
+				filter: invert(76%) sepia(27%) saturate(897%) hue-rotate(161deg)
+					brightness(102%) contrast(102%);
+			}
 		}
 	}
 
 	// .nav_btn
 	&_btn {
+		position: relative;
 		display: none;
 		width: 30px;
 		height: 30px;
+		margin-left: auto;
+
 		span {
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
 			display: inline-block;
 			width: 30px;
-			height: 2px;
+			height: 3px;
+			margin: auto;
 			border-radius: 100px;
-			background-color: #fff;
-			box-shadow: 0 -10px 0 #fff, 0 10px 0 #fff;
+			background-color: rgba(255, 255, 255, 1);
+			@extend %transition;
+			&::before,
+			&::after {
+				content: "";
+				position: absolute;
+				left: 0;
+				width: 30px;
+				height: 3px;
+				background-color: #fff;
+				border-radius: 100px;
+				@extend %transition;
+			}
+			&::before {
+				top: -10px;
+			}
+			&::after {
+				bottom: -10px;
+			}
+			@at-root .--active & {
+				background-color: rgba(255, 255, 255, 0);
+				&::before {
+					top: 50%;
+					transform: rotate(45deg) translateY(-50%);
+				}
+				&::after {
+					bottom: 50%;
+					transform: rotate(-45deg) translateY(50%);
+				}
+			}
+		}
+		@include hoverHandler {
+			span {
+				background-color: #70e2ff;
+				&::before,
+				&::after {
+					background-color: #70e2ff;
+				}
+				@at-root .--active & {
+					background-color: rgba(255, 255, 255, 0);
+				}
+			}
 		}
 		@at-root .--chating & {
 			display: none;
@@ -142,12 +210,41 @@ body {
 		overflow-y: auto;
 		display: none;
 		height: 100%;
+		padding: 0 10px;
 		// .nav_lists_item
 		&_item {
+			@include d_f(flex, center);
 			padding: 12px;
-			font-size: 18px;
-			color: #fff;
+			font-size: 14px;
+			background-color: rgba(255, 255, 255, 0.1);
+			color: #7c7b7b;
+			margin-top: 5px;
+			border-radius: 4px;
+			@extend %hand;
+			@extend %transition;
+			.icon_chat {
+				margin-right: 5px;
+			}
+			.icon_edit {
+				margin-left: auto;
+			}
+			.icon_delete {
+				margin-left: 5px;
+			}
+			i:not(.icon_chat) {
+				filter: invert(51%) sepia(0%) saturate(15%) hue-rotate(197deg)
+					brightness(94%) contrast(87%);
+				@extend %transition;
+			}
+
+			@include hoverHandler {
+				color: #fff;
+				i:not(.icon_chat) {
+					filter: invert(1);
+				}
+			}
 		}
+
 		.--chating & {
 			display: block;
 			width: 100%;
@@ -158,49 +255,46 @@ body {
 		}
 	}
 }
-
 .logo {
 	@include d_f(flex, center);
 	img:nth-child(1) {
 		flex: none;
-		width: 45px;
-		margin-right: 5px;
+		width: 40px;
+		margin-right: 10px;
 	}
 	img:nth-child(2) {
 		flex: none;
-		width: 120px;
+		width: 100px;
 	}
 }
 .add_btn {
 	position: relative;
-	@include d_f(flex, center);
+	display: none;
 	width: 100%;
 	max-width: 160px;
 	height: 50px;
+	margin: 7px auto 10px 12px;
 	padding-left: 20px;
 	background-color: #fff;
 	color: #7c7b7b;
 	border-radius: 8px;
 	@extend %transition;
+	@include mw_lg {
+		@include d_f(flex, center);
+	}
 	@at-root .--chating & {
-		position: relative;
-		transform: translateX(0);
-		right: 0;
+		@include d_f(flex, center);
+		margin: auto;
 		@include mw_xs {
-			position: absolute;
-			right: 70px;
-			transform: translateX(calc(100% + 70px));
+			margin: 7px auto 10px 12px;
 		}
 	}
-	@include mw_lg {
-		position: absolute;
-		right: 70px;
-		// display: none;
-		transform: translateX(calc(100% + 70px));
-
-		@at-root .--active & {
-			transform: translateX(0);
-		}
+	@include hoverHandler{
+		background-color: #71e1ff;
+		color: #fff;
+	}
+	@at-root .--active & {
+		@include d_f(flex, center);
 	}
 }
 .normal_inp {
@@ -212,6 +306,10 @@ body {
 	margin-left: auto;
 	background: rgba(255, 255, 255, 0.1);
 	border-radius: 4px;
+	border: 1px solid transparent;
+	@include hoverHandler {
+		border-color: #eee;
+	}
 	@at-root .--chating & {
 		margin-right: auto;
 	}
@@ -222,6 +320,7 @@ body {
 		width: 100%;
 		height: 100%;
 		padding-left: 12px;
+		color: white;
 		&::placeholder {
 			color: white;
 		}
@@ -241,25 +340,31 @@ body {
 		width: 100%;
 		max-width: 657px;
 		margin-left: auto;
+		margin-bottom: 50px;
 		color: #fff;
 		font-size: 57px;
+		@extend %transition;
 		@include mw_lg {
 			margin-right: auto;
 		}
 		@include mw_xs {
+			margin-bottom: 25px;
 			text-align: center;
 			font-size: 32px;
 		}
 
 		@at-root .--chating & {
-			transform: translateX(calc(-100% - 50px));
 			margin-left: 0;
+			transform: translateX(calc(-100% - 50px));
 		}
 	}
 	// .ailife_info
 	&_info {
 		position: relative;
 		width: 100%;
+		@at-root .--chating {
+			flex: none;
+		}
 	}
 	// .ailife_pic
 	&_pic {
@@ -276,29 +381,25 @@ body {
 	&_input {
 		position: relative;
 		top: 0;
-		margin-top: 50px;
-		@extend %transition;
-		@include mw_xs {
-			margin-top: 25px;
-		}
+
 		@at-root .--chating & {
 			width: calc(100% - 290px);
 			animation: inputAni 1s forwards;
+			@extend %transition;
 			@include mw_xs {
 				width: calc(100% - 40px);
 				padding-right: 0;
 			}
-			// transform: translateX(calc(-100% - 20px));
 		}
 		@keyframes inputAni {
 			0% {
 				opacity: 1;
 			}
-			25% {
+			70% {
 				transform: translateX(calc(-100% - 20px));
 				opacity: 0;
 			}
-			65% {
+			90% {
 				position: fixed;
 				opacity: 0;
 				top: 100%;
@@ -308,10 +409,36 @@ body {
 				position: fixed;
 				top: 100%;
 				opacity: 1;
-				margin-top: 0;
 				transform: translateY(calc(-100% - 20px));
 			}
 		}
+		// @keyframes inputAni2 {
+		// 	0% {
+		// 		position: fixed;
+		// 		top: 100%;
+		// 		opacity: 1;
+		// 		margin-top: 0;
+		// 		transform: translateY(calc(-100% - 20px));
+		// 	}
+		// 	1% {
+		// 		position: relative;
+		// 		opacity: 0;
+		// 		top: 100%;
+		// 		margin-top: 50px;
+		// 		transform: translateY(-100%);
+		// 	}
+		// 	2% {
+		// 		transform: translateX(calc(-100% - 20px));
+		// 		opacity: 1;
+		// 	}
+		// 	3% {
+		// 		transform: translateX(calc(-100% - 20px));
+		// 		opacity: 1;
+		// 	}
+		// 	100% {
+		// 		opacity: 1;
+		// 	}
+		// }
 		p {
 			max-width: 657px;
 			margin-top: 12px;
@@ -333,6 +460,7 @@ body {
 		max-width: 700px;
 		margin-top: 50px;
 		margin-left: auto;
+		@extend %transition;
 		@include mw_lg {
 			margin-right: auto;
 		}
@@ -347,6 +475,8 @@ body {
 		}
 		// .ailife_note_info
 		&_info {
+			@include d_f(flex);
+			flex-direction: column;
 			width: calc(100% / 3);
 
 			@include mw_xs {
@@ -401,6 +531,7 @@ body {
 
 		// .ailife_note_group
 		&_group {
+			height: 100%;
 			margin-top: 20px;
 			padding: 25px 15px 25px 25px;
 			background-color: rgba(255, 255, 255, 0.1);
@@ -420,19 +551,23 @@ body {
 
 	// .ailife_chatBox
 	&_chatBox {
+		position: absolute;
+		left: 0;
 		overflow-y: auto;
-		display: none;
+		transform: translateX(calc(-100% - 20px));
+		transition-delay: 0.5;
+		@extend %transition;
 		@at-root .--chating & {
-			position: absolute;
 			top: 0;
 			left: 20px;
+			right: 20px;
 			display: block;
-			width: calc(100% - 290px);
-			height: calc(100% - 100px);
-
+			height: calc(100% - 80px);
+			margin: auto;
+			padding-bottom: 50px;
+			transform: translateX(0);
 			@include mw_xs {
 				width: calc(100% - 40px);
-				padding-bottom: 20px;
 			}
 		}
 
@@ -446,9 +581,153 @@ body {
 			font-size: 14px;
 
 			&:nth-child(even) {
-				background: rgba(255, 255, 255, 0.1);
+				background: rgba(0, 0, 0, 0.3);
 			}
 		}
 	}
 }
 //
+
+.loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	@include d_f(flex, center, center);
+
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(circle at center, #2a2f89, #040000);
+	z-index: 2;
+	.loading_pic {
+		@include d_f(flex, center, center);
+		flex-direction: column;
+		margin-right: 10px;
+	}
+	// .loading_body
+	&_body {
+		position: relative;
+		@include d_f(flex, center, center);
+		width: 60px;
+		height: 60px;
+		animation: loading_body 5s infinite forwards;
+		transform-origin: center center;
+		transform: rotate(0deg) translate(0px, 0px);
+	}
+	// .loading_ball
+	&_ball {
+		position: relative;
+		width: 10px;
+		margin-bottom: 10px;
+		animation: loading_ball 5s infinite forwards;
+	}
+	// .loading_txt
+	&_txt {
+		position: relative;
+		width: 135px;
+		img:nth-child(1) {
+			position: absolute;
+			animation: loading_txt 5s infinite forwards;
+		}
+		img:nth-child(2) {
+			position: absolute;
+			animation: loading_txt1 5s infinite forwards;
+		}
+	}
+}
+@keyframes loading_body {
+	0% {
+		transform: rotate(0);
+	}
+	33% {
+		transform: rotate(120deg) translate(8px, -11px);
+	}
+
+	66% {
+		transform: rotate(240deg) translate(-7px, -11px);
+	}
+	99% {
+		transform: rotate(360deg) translate(0px, 0px);
+	}
+	100% {
+		transform: rotate(360deg) translate(0px, 0px);
+	}
+}
+@keyframes loading_ball {
+	0% {
+		transform: translateY(0);
+	}
+	15% {
+		transform: translateY(-15px);
+	}
+	33% {
+		transform: translateY(0);
+	}
+	45% {
+		transform: translateY(-15px);
+	}
+	66% {
+		transform: translateY(0);
+	}
+	75% {
+		transform: translateY(-15px);
+	}
+	99% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+@keyframes loading_txt {
+	0% {
+		transform: translateY(0);
+	}
+	15% {
+		transform: translateY(-10px);
+	}
+	30% {
+		transform: translateY(0);
+	}
+	45% {
+		transform: translateY(-10px);
+	}
+	60% {
+		transform: translateY(0);
+	}
+	75% {
+		transform: translateY(-10px);
+	}
+	90% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+@keyframes loading_txt1 {
+	0% {
+		transform: translateY(0);
+	}
+	15% {
+		transform: translateY(0);
+	}
+	30% {
+		transform: translateY(-10px);
+	}
+	45% {
+		transform: translateY(0);
+	}
+	60% {
+		transform: translateY(-10px);
+	}
+	75% {
+		transform: translateY(0);
+	}
+	90% {
+		transform: translateY(-10px);
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
