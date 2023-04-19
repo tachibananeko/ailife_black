@@ -197,8 +197,8 @@
             <div class="ailife_lists"></div>
         </div>
     </div>
-    <div class="loading" style="display: none;">
-        <!-- <div class="loading_box"> -->
+
+    <div id="loading" class="loading">
         <div class="loading_pic">
             <div class="loading_ball">
                 <img src="../images/loading_ball.svg" alt="">
@@ -212,7 +212,6 @@
             <img src="../images/loading_ball2.svg" alt="">
             <img src="../images/loading_logoTxt.svg" alt="">
         </div>
-        <!-- </div> -->
     </div>
 
 
@@ -226,6 +225,11 @@
         })
         $('#nav_btn').click(() => {
             $('#header').toggleClass('--active')
+        })
+
+        $(document).ready(() => {
+            setTimeout(() => { $('#loading').addClass('--hide') }, 2000);
+            setTimeout(() => { $('#loading').remove() }, 2800);
         })
     </script>
 </body>
