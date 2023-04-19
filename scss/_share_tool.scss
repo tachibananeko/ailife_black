@@ -104,10 +104,10 @@ body {
 		}
 		// .nav_menu_item
 		&_item {
+			@extend %hand;
 			@include d_f(inline-flex, center, center);
 			font-size: 14px;
 			filter: invert(1);
-			@extend %hand;
 			.--chating & {
 				justify-content: flex-start;
 				width: 100%;
@@ -314,10 +314,10 @@ body {
 		border-color: #eee;
 	}
 	@at-root .--chating & {
-		margin-right: auto;
+		margin-left: 0;
 	}
 	@include mw_lg {
-		margin-right: auto;
+		margin-left: 0;
 	}
 	input {
 		width: 100%;
@@ -344,7 +344,7 @@ body {
 		margin-bottom: 50px;
 		color: #fff;
 		font-size: 32px;
-		text-align: right;
+		
 		@extend %transition;
 		@include mw_sm {
 			font-size: 24px;
@@ -360,22 +360,22 @@ body {
 
 		@at-root .--chating & {
 			margin-left: 0;
-			transform: translateX(calc(-100% - 50px));
+			transform: translateX(calc(-100% - 500px));
 		}
 	}
 	// .ailife_info
 	&_info {
 		position: relative;
-		width: calc(100% - 16px * 2);
+		width: 100%;
 		max-width: calc(768px - 16px * 2);
 		margin-right: 20%;
 
 		@include mw_lg{
-			margin-right: 0;
+			margin: auto;
 		}
 
-		@at-root .--chating {
-			flex: none;
+		@at-root .--chating .ailife_info{
+			margin: auto;
 		}
 	}
 	// .ailife_pic
@@ -394,13 +394,17 @@ body {
 		position: relative;
 		top: 0;
 
+		@include mw_lg{
+		}
+
 		@at-root .--chating & {
-			width: calc(100% - 290px);
+			width: calc(100% - 240px);
+			max-width: calc(768px - 16px * 2);
 			animation: inputAni 1s forwards;
 			@extend %transition;
-			@include mw_xs {
-				width: calc(100% - 40px);
-				padding-right: 0;
+
+			@include mw_lg{
+				width: calc(100% - 16px * 2);
 			}
 		}
 		@keyframes inputAni {
@@ -408,7 +412,7 @@ body {
 				opacity: 1;
 			}
 			70% {
-				transform: translateX(calc(-100% - 20px));
+				transform: translateX(-100%);
 				opacity: 0;
 			}
 			90% {
@@ -481,7 +485,7 @@ body {
 		}
 
 		@at-root .--chating & {
-			transform: translateX(calc(-100% - 20px));
+			transform: translateX(calc(-100% - 500px));
 			margin-left: 0;
 		}
 		// .ailife_note_info
@@ -585,7 +589,7 @@ body {
 		// .ailife_chatBox_item
 		&_item {
 			width: 100%;
-			max-width: 657px;
+			max-width: calc(768px - 16px * 2);
 			margin: auto;
 			padding: 20px;
 			color: #fff;
