@@ -404,7 +404,11 @@ body {
 			@extend %transition;
 
 			@include mw_lg{
-				width: calc(100% - 16px * 2);
+				width: calc(100% - 240px - 16px * 2);
+			}
+
+			@include mw_xs{
+				width: calc(100% - 32px * 2);
 			}
 		}
 		@keyframes inputAni {
