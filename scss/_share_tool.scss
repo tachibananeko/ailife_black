@@ -1,6 +1,7 @@
 body {
 	overflow: hidden;
 	height: 100%;
+	background: linear-gradient(to right, #2a2f89, #040000);
 }
 .wrap {
 	@include d_f(flex);
@@ -9,12 +10,14 @@ body {
 	&::before {
 		content: "";
 		position: fixed;
-		right: 0;
-		bottom: 0;
 		display: block;
-		width: 130%;
-		height: 250%;
-		background: radial-gradient(circle at center, #2a2f89, #040000);
+		width: 100%;
+		height: 100%;
+		background: url(../images/contentBg.png) no-repeat right center;
+
+		@include mw_lg {
+			content: none;
+		}
 	}
 }
 .content {
@@ -24,6 +27,7 @@ body {
 	width: 100%;
 	height: 100%;
 	padding: 0 20px;
+	
 	@at-root .--chating & {
 		overflow-y: hidden;
 		width: calc(100% - 240px);
@@ -302,9 +306,8 @@ body {
 	display: block;
 	width: 100%;
 	height: 40px;
-	max-width: 657px;
 	margin-left: auto;
-	background: rgba(255, 255, 255, 0.1);
+	background: rgb(57 58 125);
 	border-radius: 4px;
 	border: 1px solid transparent;
 	@include hoverHandler {
@@ -338,17 +341,16 @@ body {
 	// .ailife_title
 	&_title {
 		width: 100%;
-		max-width: 657px;
-		margin-left: auto;
 		margin-bottom: 50px;
 		color: #fff;
 		font-size: 32px;
+		text-align: right;
 		@extend %transition;
 		@include mw_sm {
 			font-size: 24px;
 		}
 		@include mw_lg {
-			margin-right: auto;
+			text-align: center;
 		}
 		@include mw_xs {
 			margin-bottom: 25px;
@@ -364,7 +366,14 @@ body {
 	// .ailife_info
 	&_info {
 		position: relative;
-		width: 100%;
+		width: calc(100% - 16px * 2);
+		max-width: calc(768px - 16px * 2);
+		margin-right: 20%;
+
+		@include mw_lg{
+			margin-right: 0;
+		}
+
 		@at-root .--chating {
 			flex: none;
 		}
@@ -460,7 +469,6 @@ body {
 	// .ailife_note
 	&_note {
 		@include d_f(flex);
-		max-width: 700px;
 		margin-top: 50px;
 		margin-left: auto;
 		@extend %transition;
@@ -537,7 +545,7 @@ body {
 			height: 100%;
 			margin-top: 20px;
 			padding: 25px 15px 25px 25px;
-			background-color: rgba(255, 255, 255, 0.1);
+			background-color: rgb(57 58 125);
 			border-radius: 8px;
 			color: #7c7b7b;
 		}
